@@ -23,7 +23,9 @@ TEST_F(StrongFormLinkListTest, OperatorSquareBrackets){
     // Weak Robust
     // EXPECT_EQ(linkList[-1], 0); no ideas how to test
     // Strong Noraml
+        // no multi falut
     // Strong Robust
+        // no multi falut
 }
 
 TEST_F(StrongFormLinkListTest, InsertNode){
