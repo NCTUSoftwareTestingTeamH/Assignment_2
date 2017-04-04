@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "../feature_code/Link_List.h"
 
-class Strong_LinkListTest : public ::testing::Test {
+class StrongFormLinkListTest : public ::testing::Test {
     protected:
         virtual void SetUp() {
             linkList.insert_node(10);
@@ -17,7 +17,7 @@ class Strong_LinkListTest : public ::testing::Test {
 };
 
 // Strong Form
-TEST_F(Strong_LinkListTest, OperatorSquareBrackets){
+TEST_F(StrongFormLinkListTest, OperatorSquareBrackets){
     // Weak Noraml
     EXPECT_EQ(linkList[0], 10);
     // Weak Robust
@@ -26,7 +26,7 @@ TEST_F(Strong_LinkListTest, OperatorSquareBrackets){
     // Strong Robust
 }
 
-TEST_F(Strong_LinkListTest, InsertNode){
+TEST_F(StrongFormLinkListTest, InsertNode){
     // Weak Noraml
     EXPECT_EQ(linkList.insert_node(15), true);
     // Weak Robust
@@ -37,7 +37,7 @@ TEST_F(Strong_LinkListTest, InsertNode){
         // no multi falut
 }
 
-TEST_F(Strong_LinkListTest, InsertIndexNode){
+TEST_F(StrongFormLinkListTest, InsertIndexNode){
     // Weak Noraml
     EXPECT_EQ(linkList.insert_node(5, 15), true);
     // Weak Robust
@@ -48,7 +48,7 @@ TEST_F(Strong_LinkListTest, InsertIndexNode){
     EXPECT_EQ(linkList.insert_node(-1, -1), false);
 }
 
-TEST_F(Strong_LinkListTest, DeleteIndexNode){
+TEST_F(StrongFormLinkListTest, DeleteIndexNode){
     // Weak Noraml
     EXPECT_EQ(linkList.delete_node(5), true);
     // Weak Robust
