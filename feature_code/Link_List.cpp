@@ -157,7 +157,7 @@ bool Link_List::operator==(const Link_List &Right) const
 // subscript operator for non-const objects
 int &Link_List::operator[](int subscript)
 {
-    if(subscript <= 0 || subscript > size){
+    if(subscript < 0 || subscript > size){
         cerr << "\nError: Subscript " << subscript << "out of range" << endl;
         exit(1);
     }
@@ -172,7 +172,7 @@ int &Link_List::operator[](int subscript)
 // subscript operator for const objects
 int Link_List::operator[](int subscript) const
 {
-    if(subscript <= 0 || subscript > size){
+    if(subscript < 0 || subscript > size){
         cerr << "\nError: Subscript " << subscript << "out of range" << endl;
         exit(1);
     }
