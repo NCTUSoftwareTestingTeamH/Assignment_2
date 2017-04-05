@@ -1,19 +1,19 @@
 #include "Link_List.h"
 #include <cassert>
-#include <cstdlib> 
+#include <cstdlib>
 #include <iostream>
 using namespace std;
 
 //global function
 ostream &operator<<(ostream &output, const Link_List &L)
 {
-    
+
     Int_Node *ptr = L.head;
     while(ptr!= NULL){
         output << ptr->value << " ";
         ptr = ptr->next;
     }
-    
+
     return output;
 }
 
@@ -21,7 +21,7 @@ istream &operator>>(istream &input, Link_List &L)
 {
     Int_Node *n = new Int_Node;
     input >> n->value;
-    
+
     if(L.size==0){
         L.head=n;
         L.tail=n;
@@ -34,7 +34,7 @@ istream &operator>>(istream &input, Link_List &L)
         n->next = NULL;
         L.tail = L.tail->next;
     }
-    
+
     L.size++;
     return input;
 }
@@ -55,11 +55,11 @@ Link_List::Link_List(const Link_List &LinkListToCopy)
         head=NULL;
         tail=NULL;
     }
-    
+
     else{
         Int_Node *ptr = LinkListToCopy.head;
         Int_Node *n;
-        
+
         for(int i=1; i<=size; i++){
             n = new Int_Node;
             n->value = ptr->value;
@@ -110,11 +110,11 @@ const Link_List& Link_List::operator=(const Link_List &Right)
                 current = 0;
                 head = head -> next;
             }
-            
+
             size = Right.size;
             Int_Node *ptr = Right.head;
             Int_Node *n;
-            
+
             for(int i=1;i<=size;i++){
                 n = new Int_Node;
                 n->value = ptr->value;
@@ -142,7 +142,7 @@ bool Link_List::operator==(const Link_List &Right) const
 {
     if(size != Right.size)
         return false;
-    
+
     Int_Node *left_ptr = head;
     Int_Node *right_ptr = Right.head;
     for(int i=0; i<size; i++){
@@ -157,11 +157,11 @@ bool Link_List::operator==(const Link_List &Right) const
 // subscript operator for non-const objects
 int &Link_List::operator[](int subscript)
 {
-    if(subscript < 0 || subscript > size){
+    if(subscript < 0 || subscript >= size){
         cerr << "\nError: Subscript " << subscript << "out of range" << endl;
         exit(1);
     }
-    
+
     Int_Node *ptr = head;
     for(int i=1; i<subscript; i++){
         ptr = ptr->next;
@@ -172,11 +172,11 @@ int &Link_List::operator[](int subscript)
 // subscript operator for const objects
 int Link_List::operator[](int subscript) const
 {
-    if(subscript < 0 || subscript > size){
+    if(subscript < 0 || subscript >= size){
         cerr << "\nError: Subscript " << subscript << "out of range" << endl;
         exit(1);
     }
-    
+
     Int_Node *ptr = head;
     for(int i=1; i<subscript; i++){
         ptr = ptr->next;
@@ -189,7 +189,7 @@ bool Link_List::insert_node(int number)
 {
     Int_Node *n = new Int_Node;
     n->value = number;
-    
+
     if(size == 0){
         head = n;
         tail = n;
@@ -203,27 +203,27 @@ bool Link_List::insert_node(int number)
         n->next = NULL;
     }
     size++;
-    
+
     return 1;
 }
 
 // insert an integer after the i_th position
 bool Link_List::insert_node(int index, int number)
 {
-    if(index < 0)  return 0;
-    
-    
+    if(index < 0 || index > size)  return false;
+
+
     Int_Node *ptr = head;
     Int_Node *n = new Int_Node;
     n->value = number;
-    
+
     if(index != 0){
         for(int i=1;i<index;i++){
             ptr = ptr->next;
         }
     }
-    
-    
+
+
     if(index == size){
         n->next = NULL;
         n->pre = ptr;
@@ -243,55 +243,55 @@ bool Link_List::insert_node(int index, int number)
         n->pre = ptr;
     }
     size++;
-    return 1;
+    return true;
 }
 
 // delete the last node
 bool Link_List::delete_node()
 {
-    if(size == 0)   return 0;
-    
+    if(size == 0)   return false;
+
     size--;
     Int_Node *current = tail;
     Int_Node *previous = tail->pre;
-    
+
     if(current == head){
         head = NULL;
         tail = NULL;
         delete current;
-        current = NULL;     // 
+        current = NULL;     //
     }
     else{
         previous->next = NULL;
         tail = previous;
         delete current;
         current = NULL;
-        
+
     }
-    
-    return 1;
+
+    return true;
 }
 
 // delete the i_th node
 bool Link_List::delete_node(int index)
 {
-    if(index <= 0 || index > size)  return 0;
-    
-    
+    if(index < 0 || index >= size)  return false;
+
+
     Int_Node *ptr = head;
     for(int i=1;i<index;i++){
         ptr = ptr->next;
     }
     Int_Node *current = ptr;
     Int_Node *previous = ptr->pre;
-    
-    if(size == 1 && index == 1){        //
+
+    if(size == 1 && index == 0){        //
         tail = NULL;
         delete current;
         current = NULL;
     }
-    
-    else if(index == 1){                //
+
+    else if(index == 0){                //
         head = current ->next;
         head -> pre = NULL;
         delete current;
@@ -309,7 +309,7 @@ bool Link_List::delete_node(int index)
         delete current;
         current = NULL;
     }
-    
+
     size--;
-    return 1;
+    return true;
 }
