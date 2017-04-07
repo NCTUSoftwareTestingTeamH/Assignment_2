@@ -1,0 +1,34 @@
+language: cpp
+os:
+  - linux
+
+compiler:
+  - gcc
+  - clang
+
+install:
+  - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-4.8"; fi
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
+      - clang
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+
+script:
+  - git submodule init && git submodule update
+  - mkdir build && cd build
+  - cmake ..
+  - make all -j 8
+  - ./edge_testing/edge_test_runner &&
+    ./decisiontable_testing/decisiontable_testing &&
+    ./equivalence_testing/StrongFormTesting &&
+    ./equivalence_testing/WeakFormTesting
