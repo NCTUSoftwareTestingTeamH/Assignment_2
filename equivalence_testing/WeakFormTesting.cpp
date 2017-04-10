@@ -39,7 +39,7 @@ TEST_F(WeakFormLinkListTest, InsertIndexNode){
 
 TEST_F(WeakFormLinkListTest, DeleteIndexNode){
     // Weak Noraml
-    EXPECT_EQ(linkList.delete_node(5), true);
+    EXPECT_EQ(linkList.delete_node(4), true);
     // Weak Robust
     EXPECT_EQ(linkList.delete_node(-1), false);
 }
