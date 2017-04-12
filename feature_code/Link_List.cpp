@@ -163,7 +163,7 @@ int &Link_List::operator[](int subscript)
     }
 
     Int_Node *ptr = head;
-    for(int i=1; i<subscript; i++){
+    for(int i=0; i<subscript; i++){
         ptr = ptr->next;
     }
     return ptr->value;
@@ -178,7 +178,7 @@ int Link_List::operator[](int subscript) const
     }
 
     Int_Node *ptr = head;
-    for(int i=1; i<subscript; i++){
+    for(int i=0; i<subscript; i++){
         ptr = ptr->next;
     }
     return ptr->value;
